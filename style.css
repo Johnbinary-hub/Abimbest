@@ -12,12 +12,24 @@ header {
     z-index: 1000;
 }
 
+/* Allow wrapping in header */
 .header {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 10px;
+}
+
+/* Make items stack nicely on very small screens */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+    }
+    .srch {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 .logo {
@@ -80,8 +92,8 @@ header {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    margin-bottom: 40px;
 }
+
 
 .product {
     border: 1px solid #ccc;
@@ -90,8 +102,17 @@ header {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
-    width: 250px;
+    flex: 0 0 calc(33.333% - 20px); /* 3 items per row */
+    box-sizing: border-box;
 }
+
+/* Force 2 per row on very narrow screens */
+@media (max-width: 500px) {
+    .product {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+
 
 .product:hover {
     transform: translateY(-5px);
